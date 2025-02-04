@@ -35,7 +35,7 @@ app.post("/", async (req, res) => {
         // console.log(longitude);
 
         const response_weather = await axios.get(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,is_day,rain,cloud_cover,wind_speed_10m,wind_direction_10m`
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,is_day,precipitation,cloud_cover,wind_speed_10m,wind_direction_10m`
         );
 
         // console.log(cityName);
