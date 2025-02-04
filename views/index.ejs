@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles/main.css" />
+        <title>Weather API</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Let's find out the weather</h1>
+
+            <form action="/" id="form" class="form" method="POST">
+              <select id="city-select" name="city" class="form-select">
+                <option value="" data-display="Select">City</option>
+                <option value="London,GB">London</option>
+                <option value="Madrid,ES">Madrid</option>
+                <option value="New_York,US">New York</option>
+                <option value="Tokyo,JP">Tokyo</option>
+                <option value="New_Delhi,IN">New Delhi</option>
+                <option value="Moscow,RU">Moscow</option>
+                <option value="Paris,FR">Paris</option>
+                <option value="Dubai,UAE">Dubai</option>
+                <option value="Beijing,CN">Beijing</option>
+                <option value="Sydney,AU">Sydney</option>
+                <option value="São_Paulo,BR">São Paulo</option>
+                <option value="Mexico_City,MX">Mexico City</option>
+                <option value="Cairo,EG">Cairo</option>
+                <option value="Berlin,DE">Berlin</option>
+                <option value="Rome,IT">Rome</option>
+                <option value="Seoul,KR">Seoul</option>
+                <option value="Istanbul,TR">Istanbul</option>
+                <option value="Bangkok,TH">Bangkok</option>
+                <option value="Johannesburg,ZA">Johannesburg</option>
+                <option value="Toronto,CA">Toronto</option>
+                <option value="Buenos_Aires,AR">Buenos Aires</option>
+            </select>
+            
+
+                <button type="submit" class="form-submit">Search</button>
+            </form>
+            <section id="cards" class="cards">
+                <%if (locals.data) {%>
+
+                <article class="card-item">
+                    <h2 class="card-activity">Weather in <%= city %> 👇</h2>
+                    <div class="card-info">
+                        <span class="card-type">
+                            Temperature: <%= data.current.temperature_2m %> °C.
+                        </span>
+                        </div>
+                        <div class="card-info">
+                        <span class="card-type">
+                            Relative humidity: <%=
+                            data.current.relative_humidity_2m %> %.
+                        </span>
+                        </div>
+                        <div class="card-info">
+                          <span class="card-type">
+                            Day / Night: <% if(locals.data.current.is_day) { %>
+                            <a>Day time ☀️</a>
+                            <% } else { %>
+                            <a>Night time 🌜</a>
+                            <% } %>
+                          </span>
+                        </div>
+                        <div class="card-info">
+                          <span class="card-type">
+                            Raining?: <% if(locals.data.current.precipitation >= 0.1) { %>
+                            <a>Yes ☔</a>
+                            <% } else { %>
+                            <a>No 🌂</a>
+                            <% } %>
+                          </span>
+                          <span class="card-type">
+                            Cloud cover: <%= data.current.cloud_cover %> %
+                          </span>
+                        </div>
+                        <div class="card-info">
+                          <span class="card-type">
+                            Wind speed: <%= data.current.wind_speed_10m %> km/h
+                          </span>
+                          <span class="card-type">
+                            Wind direction: <%= data.current.wind_direction_10m %>°
+                          </span>
+
+                        </div>
+
+
+                    </div>
+                </article>
+
+                <%}%> <%if (locals.error) {%>
+                <div id="tag-error" class="tag-error">
+                  <span><%=error  %></span></div>
+                <%}%>
+            </section>
+        </div>
+        <script src="/form-handler.js"></script>
+    </body>
+</html>
